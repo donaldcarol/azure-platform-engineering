@@ -36,12 +36,14 @@ stages:
 
     steps:
 
-    - script: |
-        terraform version
-
-        cd terraform
-
-        terraform init
-
-        terraform plan -var="resource_group_name=rg-devops-lab" -var="location=westeurope"
-      displayName: Terraform Plan
+   - task: AzureCLI@2
+  displayName: Terraform Plan
+  inputs:
+    azureSubscription: 'sc-azure-platform-lab'
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: |
+      terraform version
+      cd terraform
+      terraform init
+      terraform plan -var="resource_group_name=rg-devops-lab" -var="location=westeurope"
