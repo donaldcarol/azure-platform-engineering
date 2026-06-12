@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: SelfHosted
+  name: SelfHosted
 
 stages:
 
