@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: SelfHosted
+  name: Default
 
 stages:
 
