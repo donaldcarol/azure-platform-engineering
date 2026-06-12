@@ -28,4 +28,35 @@ This repository demonstrates an enterprise-style Azure DevOps workflow for infra
     ├── 02-service-connection.md
     ├── 03-variable-groups.md
     ├── 04-terraform-plan-apply.md
-    └── 05-production-approvals.md
+    └── 05-production-apprvals.md
+```  
+
+
+ ##  Planned Pipeline Flow
+
+```
+Validate
+   ↓
+Terraform Plan
+   ↓
+Manual Approval
+   ↓
+Terraform Apply
+```
+
+## Key Concepts
+- CI/CD
+- Infrastructure as Code
+- Terraform remote state
+- Azure DevOps service connections
+- Variable groups
+- Environment approvals
+
+## Separation between plan and apply
+- Interview Topics Covered
+- What is the difference between CI and CD?
+- What are stages, jobs and steps in Azure DevOps Pipelines?
+- How do you secure secrets in pipelines?
+- Why should Terraform plan and apply be separated?
+- How do approvals protect production environments?
+- How do service connections authenticate pipelines to Azure?
