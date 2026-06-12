@@ -8,11 +8,19 @@ stages:
 
 - stage: Validate
   displayName: Terraform Validate
+
   jobs:
   - job: Validate
+
     steps:
+
     - script: |
+        curl -LO https://releases.hashicorp.com/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip
+        unzip terraform_1.12.2_linux_amd64.zip
+        chmod +x terraform
+        sudo mv terraform /usr/local/bin/
         terraform version
+
         cd terraform
         terraform init
         terraform validate
@@ -20,14 +28,21 @@ stages:
 
 - stage: Plan
   displayName: Terraform Plan
+
   dependsOn: Validate
+
   jobs:
   - job: Plan
+
     steps:
+
     - script: |
         terraform version
+
         cd terraform
+
         terraform init
+
         terraform plan \
           -var="resource_group_name=rg-devops-lab" \
           -var="location=westeurope"
