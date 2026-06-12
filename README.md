@@ -1,20 +1,31 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Azure Platform Engineering Lab
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This repository demonstrates an enterprise-style Azure DevOps workflow for infrastructure automation using Azure DevOps Pipelines and Terraform.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Objectives
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- Use Azure DevOps Repos for source control
+- Build a multi-stage YAML pipeline
+- Separate Terraform validation, plan and apply stages
+- Use Azure service connections securely
+- Prepare for environment approvals before production deployment
+- Document enterprise DevOps practices
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Repository Structure
+
+```text
+.
+├── pipelines/
+│   └── azure-pipelines.yml
+├── terraform/
+│   ├── main.tf
+│   ├── providers.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   └── terraform.tfvars.example
+└── docs/
+    ├── 01-pipeline-overview.md
+    ├── 02-service-connection.md
+    ├── 03-variable-groups.md
+    ├── 04-terraform-plan-apply.md
+    └── 05-production-approvals.md
