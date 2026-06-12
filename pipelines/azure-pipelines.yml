@@ -43,7 +43,5 @@ stages:
 
         terraform init
 
-        terraform plan \
-          -var="resource_group_name=rg-devops-lab" \
-          -var="location=westeurope"
+        terraform plan -var="resource_group_name=rg-devops-lab" -var="location=westeurope"
       displayName: Terraform Plan
