@@ -8,18 +8,11 @@ stages:
 
 - stage: Validate
   displayName: Terraform Validate
-
   jobs:
   - job: Validate
-
     steps:
-
-   - script: |
-   
-  displayName: Install Terraform
-      
-
     - script: |
+        terraform version
         cd terraform
         terraform init
         terraform validate
@@ -27,20 +20,12 @@ stages:
 
 - stage: Plan
   displayName: Terraform Plan
-
   dependsOn: Validate
-
   jobs:
   - job: Plan
-
     steps:
-
     - script: |
-   
-    terraform version
-  displayName: Install Terraform
-
-    - script: |
+        terraform version
         cd terraform
         terraform init
         terraform plan \
