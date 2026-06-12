@@ -1,0 +1,47 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+
+- stage: Validate
+  displayName: Terraform Validate
+
+  jobs:
+  - job: Validate
+
+    steps:
+
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: latest
+
+    - script: |
+        cd terraform
+        terraform init
+        terraform validate
+      displayName: Terraform Init and Validate
+
+- stage: Plan
+  displayName: Terraform Plan
+
+  dependsOn: Validate
+
+  jobs:
+  - job: Plan
+
+    steps:
+
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: latest
+
+    - script: |
+        cd terraform
+        terraform init
+        terraform plan \
+          -var="resource_group_name=rg-devops-lab" \
+          -var="location=westeurope"
+      displayName: Terraform Plan
