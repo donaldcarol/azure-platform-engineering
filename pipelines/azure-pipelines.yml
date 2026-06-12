@@ -15,10 +15,7 @@ stages:
     steps:
 
    - script: |
-    wget https://releases.hashicorp.com/terraform/1.13.0/terraform_1.13.0_linux_amd64.zip
-    unzip terraform_1.13.0_linux_amd64.zip
-    sudo mv terraform /usr/local/bin/
-    terraform version
+   
   displayName: Install Terraform
       
 
@@ -39,9 +36,7 @@ stages:
     steps:
 
     - script: |
-    wget https://releases.hashicorp.com/terraform/1.13.0/terraform_1.13.0_linux_amd64.zip
-    unzip terraform_1.13.0_linux_amd64.zip
-    sudo mv terraform /usr/local/bin/
+   
     terraform version
   displayName: Install Terraform
 
