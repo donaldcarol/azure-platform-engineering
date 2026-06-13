@@ -28,10 +28,29 @@ steps:
     dir C:\Users
   displayName: List Users
 
-- task: AzureCLI@3
+
+
+- script: echo Hello from CMD
+
+- pwsh: |
+    Write-Host "Hello from PowerShell"
+    Get-Date
+    Get-Process
+
+- powershell: |
+    Get-Date
+    Get-Process
+
+
+- bash: |
+    hostname
+    whoami
+
+    
+- task: AzureCLI@2
   inputs:
-    connectionType: 'azureRM'
     azureSubscription: 'sc-azure-platform-lab'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az account show'
+    scriptType: pscore
+    scriptLocation: inlineScript
+    inlineScript: |
+      Write-Host "Hello from AzureCLI PowerShell"
