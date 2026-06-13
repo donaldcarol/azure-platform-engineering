@@ -31,7 +31,7 @@ steps:
 - task: AzureCLI@3
   inputs:
     connectionType: 'azureRM'
-    azureSubscription: 'Azure subscription 1(b7ce91a3-5078-4af1-93ad-6c9d2218a4b1)'
+    azureSubscription: 'sc-azure-platform-lab'
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: 'az account show'
