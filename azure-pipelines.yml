@@ -36,10 +36,18 @@ steps:
     Write-Host "Hello from PowerShell"
     Get-Date
     
-
-
-
-
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'sc-azure-platform-lab'
+    ScriptType: 'InlineScript'
+    Inline: |
+      Get-AzContext
+      Get-AzResourceGroup
+      Get-AzResourceGroup -Name rg-devops-lab
+      Get-AzResource `
+          -ResourceGroupName rg-devops-lab
+      Get-AzVM
+    azurePowerShellVersion: 'LatestVersion'
     
 - task: AzureCLI@2
   inputs:
