@@ -35,3 +35,30 @@ stages:
           cd terraform
           terraform init
           terraform plan -var="resource_group_name=rg-devops-lab" -var="location=westeurope"
+
+- stage: Apply
+  displayName: Terraform Apply
+  dependsOn: Plan
+
+  jobs:
+  - job: Apply
+
+    steps:
+    - task: AzureCLI@2
+      displayName: Terraform Apply
+
+      inputs:
+        azureSubscription: 'sc-azure-platform-lab'
+        scriptType: ps
+        scriptLocation: inlineScript
+
+        inlineScript: |
+          terraform version
+
+          cd terraform
+
+          terraform init
+
+          terraform apply -auto-approve `
+            -var="resource_group_name=rg-devops-lab" `
+            -var="location=westeurope"
