@@ -35,11 +35,8 @@ steps:
 - pwsh: |
     Write-Host "Hello from PowerShell"
     Get-Date
-    Get-Process
+    
 
-- powershell: |
-    Get-Date
-    Get-Process
 
 
 
