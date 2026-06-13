@@ -1,3 +1,7 @@
+![Self Hosted Agent](https://img.shields.io/badge/Self--Hosted-Agent-orange)
+![YAML Pipelines](https://img.shields.io/badge/YAML-Pipelines-blue)
+![Azure CLI](https://img.shields.io/badge/Azure%20CLI-Automation-0078D4)
+
 # Azure Platform Engineering Lab
 
 This repository demonstrates an enterprise-style Azure DevOps workflow for infrastructure automation using Azure DevOps Pipelines and Terraform.
