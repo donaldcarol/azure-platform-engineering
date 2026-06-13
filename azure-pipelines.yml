@@ -48,6 +48,7 @@ steps:
           -ResourceGroupName rg-devops-lab
       Get-AzVM
     azurePowerShellVersion: 'LatestVersion'
+    pwsh: true
     
 - task: AzureCLI@2
   inputs:
