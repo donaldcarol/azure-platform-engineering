@@ -16,3 +16,13 @@ steps:
 
 - script: whoami
   displayName: Show User
+
+- script: |
+    hostname
+    whoami
+    echo %COMPUTERNAME%
+  displayName: System Info
+
+- script: |
+    dir C:\Users
+  displayName: List Users
