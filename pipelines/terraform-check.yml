@@ -9,10 +9,10 @@ steps:
     echo %PATH%
   displayName: Show PATH
 - script: |
-    dir "C:\Program Files\HashiCorp\Terraform"
+    dir "C:\tools\terraform"
   displayName: Find Terraform
 - script: |
-    "C:\Program Files\HashiCorp\Terraform\terraform.exe" version
+    "C:\tools\terraform\terraform.exe" version
   displayName: Terraform Full Path
 - script: terraform version
   displayName: Terraform Version
