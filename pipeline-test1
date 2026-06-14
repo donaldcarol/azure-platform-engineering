@@ -1,0 +1,39 @@
+trigger: none
+
+pool:
+  name: Default
+
+stages:
+- stage: Discovery
+  displayName: Discovery Stage
+  jobs:
+  - job: SystemInfo
+    displayName: System Information
+    steps:
+    - script: hostname
+      displayName: Show Hostname
+
+    - script: whoami
+      displayName: Show Current User
+
+    - pwsh: |
+        Get-Date
+        $PSVersionTable.PSVersion
+      displayName: Show PowerShell Version
+
+- stage: AzureInfo
+  displayName: Azure Information Stage
+  dependsOn: Discovery
+  jobs:
+  - job: AzureCLIInfo
+    displayName: Azure CLI Information
+    steps:
+    - task: AzureCLI@3
+      displayName: Show Azure Account
+      inputs:
+        azureSubscription: 'sc-azure-platform-lab'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          az account show
+          az group list --output table
