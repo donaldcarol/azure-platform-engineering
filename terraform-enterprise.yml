@@ -1,0 +1,64 @@
+name: terraform-enterprise-$(Date:yyyyMMdd)-$(Rev:r)
+
+trigger:
+- main
+
+pool:
+  name: Default
+
+variables:
+  resourceGroupName: rg-devops-lab
+  location: westeurope
+
+stages:
+- stage: Validate
+  displayName: Terraform Validate
+  jobs:
+  - job: Validate
+    displayName: Validate Terraform Code
+    steps:
+    - script: |
+        terraform version
+        cd terraform
+        terraform init
+        terraform fmt -check
+        terraform validate
+      displayName: Terraform Init, Format and Validate
+
+- stage: Plan
+  displayName: Terraform Plan
+  dependsOn: Validate
+  jobs:
+  - job: Plan
+    displayName: Generate Terraform Plan
+    steps:
+    - task: AzureCLI@3
+      displayName: Terraform Plan
+      inputs:
+        azureSubscription: 'sc-azure-platform-lab'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          terraform version
+          cd terraform
+          terraform init
+          terraform plan -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)"
+
+- stage: Apply
+  displayName: Terraform Apply
+  dependsOn: Plan
+  jobs:
+  - job: Apply
+    displayName: Apply Terraform Changes
+    steps:
+    - task: AzureCLI@3
+      displayName: Terraform Apply
+      inputs:
+        azureSubscription: 'sc-azure-platform-lab'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          terraform version
+          cd terraform
+          terraform init
+          terraform apply -auto-approve -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)"
