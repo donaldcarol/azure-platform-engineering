@@ -1,5 +1,9 @@
+trigger:
+- none
 
+pool:
+  name: default
 
-
+steps:
 - script: terraform version
   displayName: Terraform Version
