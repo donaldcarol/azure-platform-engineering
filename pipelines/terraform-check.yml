@@ -5,5 +5,14 @@ pool:
   name: default
 
 steps:
+- script: |
+    echo %PATH%
+  displayName: Show PATH
+- script: |
+    dir "C:\Program Files\HashiCorp\Terraform"
+  displayName: Find Terraform
+- script: |
+    "C:\Program Files\HashiCorp\Terraform\terraform.exe" version
+  displayName: Terraform Full Path
 - script: terraform version
   displayName: Terraform Version
