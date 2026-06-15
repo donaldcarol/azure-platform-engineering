@@ -1,0 +1,49 @@
+trigger: none
+
+pool:
+  name: Default
+
+variables:
+  environment: dev
+  location: westeurope
+
+stages:
+
+- stage: Discovery
+
+  jobs:
+
+  - job: SystemInfo
+
+    steps:
+
+    - script: hostname
+      displayName: Hostname
+
+    - script: whoami
+      displayName: Current User
+
+    - pwsh: |
+        Write-Host "Environment: $(environment)"
+        Write-Host "Location: $(location)"
+      displayName: Variables Demo
+
+- stage: AzureInfo
+
+  dependsOn: Discovery
+
+  jobs:
+
+  - job: AzureDiscovery
+
+    steps:
+
+    - task: AzureCLI@3
+
+      inputs:
+        azureSubscription: 'sc-azure-platform-lab'
+        scriptType: pscore
+        scriptLocation: inlineScript
+
+        inlineScript: |
+          az account show
