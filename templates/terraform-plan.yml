@@ -3,8 +3,16 @@ parameters:
   type: string
   default: terraform
 
+- name: azureSubscription
+  type: string
+
 steps:
-- script: |
-    terraform plan
-  workingDirectory: ${{ parameters.workingDirectory }}
+- task: AzureCLI@2
   displayName: Terraform Plan
+  inputs:
+    azureSubscription: ${{ parameters.azureSubscription }}
+    scriptType: ps
+    scriptLocation: inlineScript
+    workingDirectory: ${{ parameters.workingDirectory }}
+    inlineScript: |
+      terraform plan
