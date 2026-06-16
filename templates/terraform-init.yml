@@ -6,11 +6,17 @@ parameters:
 - name: terraformVersion
   type: string
 
+
+- name: environment
+  type: string
+  default: dev
+
 steps:
 
 - script: |
     echo Terraform Version:
     echo ${{ parameters.terraformVersion }}
+    echo ${{ parameters.enviroment }}
 
   workingDirectory: ${{ parameters.workingDirectory }}
   displayName: Show Terraform Version
