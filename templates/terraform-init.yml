@@ -13,3 +13,4 @@ steps:
     echo ${{ parameters.terraformVersion }}
 
   workingDirectory: ${{ parameters.workingDirectory }}
+  displayName: Show Terraform Version
