@@ -8,5 +8,5 @@ steps:
 
 - template: templates/terraform-init.yml
 parameters:
-    workingDirectory: terraform
-    terraformVersion: 1.14.4
+  workingDirectory: terraform
+  terraformVersion: 1.14.4
