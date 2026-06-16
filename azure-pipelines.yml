@@ -10,3 +10,5 @@ steps:
   parameters:
     workingDirectory: terraform
     terraformVersion: 1.14.4
+
+- template: templates/terraform-validate.yml
