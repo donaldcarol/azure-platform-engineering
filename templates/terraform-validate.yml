@@ -1,13 +1,12 @@
 parameters:
-
-- name: environment
+- name: workingDirectory
   type: string
-  default: dev
+  default: terraform
 
 steps:
-
 - script: |
-    echo Terraform Validate
-    echo Environment: ${{ parameters.environment }}
-
-  displayName: Terraform Validate
+    terraform version
+    terraform init
+    terraform validate
+  workingDirectory: ${{ parameters.workingDirectory }}
+  displayName: Terraform Init and Validate
