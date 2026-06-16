@@ -1,7 +1,7 @@
 name: terraform-enterprise-$(Date:yyyyMMdd)-$(Rev:r)
 
 trigger:
-- main
+- none
 
 pool:
   name: Default
