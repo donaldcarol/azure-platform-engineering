@@ -8,5 +8,5 @@ steps:
 
 
 - template: templates/terraform-validate.yml
-  parameters:
-    workingDirectory: terraform
+- template: templates/terraform-plan.yml
+  
