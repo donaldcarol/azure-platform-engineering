@@ -5,6 +5,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- template: templates/terraform-install.yml
+  parameters:
+    terraformVersion: 1.14.4
+
 - template: templates/terraform-validate.yml
   parameters:
     workingDirectory: terraform
