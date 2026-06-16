@@ -16,7 +16,7 @@ steps:
 - script: |
     echo Terraform Version:
     echo ${{ parameters.terraformVersion }}
-    echo ${{ parameters.enviroment }}
+    echo ${{ parameters.environment }}
 
   workingDirectory: ${{ parameters.workingDirectory }}
   displayName: Show Terraform Version
