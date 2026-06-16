@@ -1,0 +1,13 @@
+- task: AzureCLI@3
+  inputs:
+    connectionType: 'azureRM'
+    azureSubscription: 'sc-azure-platform-lab'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az show resource-groups'
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'sc-azure-platform-lab'
+    ScriptType: 'InlineScript'
+    Inline: 'get-azgroups'
+    preferredAzurePowerShellVersion: 'pwsh'
