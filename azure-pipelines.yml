@@ -11,5 +11,5 @@ steps:
 - template: templates/terraform-plan.yml
     parameters:
     workingDirectory: terraform
-    azureSubscription: 'NUMELE_SERVICE_CONNECTION'
+    azureSubscription: 'sc-azure-platform-lab'
   
