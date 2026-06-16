@@ -1,0 +1,13 @@
+parameters:
+
+- name: environment
+  type: string
+  default: dev
+
+steps:
+
+- script: |
+    echo Terraform Validate
+    echo Environment: ${{ parameters.environment }}
+
+  displayName: Terraform Validate
