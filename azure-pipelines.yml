@@ -9,7 +9,7 @@ steps:
 
 - template: templates/terraform-validate.yml
 - template: templates/terraform-plan.yml
-    parameters:
+  parameters:
     workingDirectory: terraform
     azureSubscription: 'sc-azure-platform-lab'
   
