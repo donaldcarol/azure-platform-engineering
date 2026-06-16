@@ -1,0 +1,10 @@
+parameters:
+- name: workingDirectory
+  type: string
+  default: terraform
+
+steps:
+- script: |
+    terraform plan
+  workingDirectory: ${{ parameters.workingDirectory }}
+  displayName: Terraform Plan
