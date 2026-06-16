@@ -1,9 +1,15 @@
 parameters:
+
 - name: workingDirectory
+  type: string
+
+- name: terraformVersion
   type: string
 
 steps:
 
-- script: terraform init
+- script: |
+    echo Terraform Version:
+    echo ${{ parameters.terraformVersion }}
+
   workingDirectory: ${{ parameters.workingDirectory }}
-  displayName: Terraform Init
