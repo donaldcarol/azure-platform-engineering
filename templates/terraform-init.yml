@@ -1,1 +1,4 @@
-# vdfwefew
+steps:
+
+- script: terraform init
+  displayName: Terraform Init
