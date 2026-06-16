@@ -1,4 +1,9 @@
+parameters:
+- name: workingDirectory
+  type: string
+
 steps:
 
 - script: terraform init
+  workingDirectory: ${{ parameters.workingDirectory }}
   displayName: Terraform Init
