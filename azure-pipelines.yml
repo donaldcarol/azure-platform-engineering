@@ -7,3 +7,5 @@ pool:
 steps:
 
 - template: templates/terraform-init.yml
+parameters:
+    workingDirectory: terraform
