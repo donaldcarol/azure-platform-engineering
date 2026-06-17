@@ -1,0 +1,16 @@
+parameters:
+
+- name: workingDirectory
+  type: string
+  default: terraform
+
+jobs:
+
+- job: TerraformPlan
+
+  steps:
+
+  - script: terraform version
+
+  - script: terraform plan
+    workingDirectory: ${{ parameters.workingDirectory }}
