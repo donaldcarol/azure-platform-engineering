@@ -1,12 +1,10 @@
-trigger:
-- none
+trigger: none
 
 pool:
   name: Default
 
-
 jobs:
-  - template: templates/terraform-plan-job.yml
- 
-    
-  
+- template: templates/terraform-plan-job.yml
+  parameters:
+    workingDirectory: terraform
+    azureSubscription: 'Azure subscription 1'
