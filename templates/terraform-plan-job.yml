@@ -3,7 +3,7 @@ parameters:
   type: string
   default: terraform
 
-- name: sc-azure-platform-lab
+- name: 'sc-azure-platform-lab'
   type: string
 
 jobs:
