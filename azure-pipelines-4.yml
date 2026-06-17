@@ -1,5 +1,5 @@
 # Starter pipeline
-
+trigger: none
 
 parameters:
 - name: workingDirectory
