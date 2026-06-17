@@ -6,9 +6,10 @@ pool:
 variables:
 - group: terraform-lab
 
-jobs:
- - script: |
-     echo $(location)
-     echo $(resourceGroupName)
-     echo $(azureSubscription)
+steps:
+
+- script: |
+    echo $(location)
+    echo $(resourceGroupName)
+    echo $(azureSubscription)
   
