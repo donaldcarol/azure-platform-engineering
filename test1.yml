@@ -1,0 +1,14 @@
+trigger: none
+
+pool:
+  name: Default
+
+
+variables:
+  myEnvironment: dev
+
+steps:
+
+- script: |
+    echo Parameter = ${{ parameters.environment }}
+    echo Variable  = $(myEnvironment)
