@@ -1,16 +1,22 @@
 parameters:
-
 - name: workingDirectory
   type: string
   default: terraform
 
+- name: azureSubscription
+  type: string
+
 jobs:
-
 - job: TerraformPlan
-
+  displayName: Terraform Plan
   steps:
-
-  - script: terraform version
-
-  - script: terraform plan
-    workingDirectory: ${{ parameters.workingDirectory }}
+  - task: AzureCLI@2
+    displayName: Terraform Init and Plan
+    inputs:
+      azureSubscription: ${{ parameters.azureSubscription }}
+      scriptType: ps
+      scriptLocation: inlineScript
+      workingDirectory: ${{ parameters.workingDirectory }}
+      inlineScript: |
+        terraform init
+        terraform plan
