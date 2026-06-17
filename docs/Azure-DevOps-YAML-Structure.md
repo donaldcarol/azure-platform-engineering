@@ -98,6 +98,162 @@ stages:
 
 ---
 
+### More detailed example
+
+```
+trigger: none
+
+pool:
+  name: Default
+
+variables:
+- group: terraform-lab
+
+stages:
+
+# =========================
+# 1. VALIDATE
+# =========================
+- stage: Validate
+  displayName: Validate Code
+
+  jobs:
+  - job: ValidateTerraform
+    displayName: Validate Terraform
+
+    steps:
+    - script: |
+        echo Checking repository files
+        dir
+      displayName: Show Repo Files
+
+    - task: AzureCLI@2
+      displayName: Terraform Init and Validate
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: ps
+        scriptLocation: inlineScript
+        workingDirectory: terraform
+        inlineScript: |
+          terraform version
+          terraform init
+          terraform validate
+
+
+# =========================
+# 2. PLAN
+# =========================
+- stage: Plan
+  displayName: Terraform Plan
+  dependsOn: Validate
+  condition: succeeded()
+
+  jobs:
+  - job: TerraformPlan
+    displayName: Generate Terraform Plan
+
+    steps:
+    - task: AzureCLI@2
+      displayName: Terraform Init and Plan
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: ps
+        scriptLocation: inlineScript
+        workingDirectory: terraform
+        inlineScript: |
+          terraform init
+          terraform plan -out=tfplan
+          terraform show tfplan > tfplan.txt
+
+    - publish: terraform/tfplan
+      artifact: terraform-plan
+      displayName: Publish Binary Terraform Plan
+
+    - publish: terraform/tfplan.txt
+      artifact: terraform-plan-readable
+      displayName: Publish Readable Terraform Plan
+
+
+# =========================
+# 3. SECURITY / REVIEW
+# =========================
+- stage: Review
+  displayName: Review Plan
+  dependsOn: Plan
+  condition: succeeded()
+
+  jobs:
+  - job: ShowPlan
+    displayName: Show Terraform Plan Summary
+
+    steps:
+    - download: current
+      artifact: terraform-plan-readable
+      displayName: Download Readable Plan
+
+    - powershell: |
+        Write-Host "Showing downloaded Terraform plan:"
+        Get-ChildItem -Recurse "$(Pipeline.Workspace)"
+      displayName: List Downloaded Artifacts
+
+
+# =========================
+# 4. APPLY
+# =========================
+- stage: Apply
+  displayName: Terraform Apply
+  dependsOn: Review
+  condition: succeeded()
+
+  jobs:
+  - job: TerraformApply
+    displayName: Apply Terraform Plan
+
+    steps:
+    - download: current
+      artifact: terraform-plan
+      displayName: Download Binary Terraform Plan
+
+    - task: AzureCLI@2
+      displayName: Terraform Apply
+      inputs:
+        azureSubscription: $(azureSubscription)
+        scriptType: ps
+        scriptLocation: inlineScript
+        workingDirectory: terraform
+        inlineScript: |
+          terraform init
+          terraform apply "$(Pipeline.Workspace)/terraform-plan/tfplan"
+
+
+# =========================
+# 5. CLEANUP / NOTIFY
+# =========================
+- stage: Final
+  displayName: Final Status
+  dependsOn:
+  - Validate
+  - Plan
+  - Review
+  - Apply
+  condition: always()
+
+  jobs:
+  - job: FinalMessage
+    displayName: Final Pipeline Message
+
+    steps:
+    - powershell: |
+        Write-Host "Pipeline completed."
+        Write-Host "Build number: $(Build.BuildNumber)"
+        Write-Host "Branch: $(Build.SourceBranch)"
+        Write-Host "Agent: $(Agent.Name)"
+      displayName: Show Final Info
+
+  ```
+
+  ---
+
 ## 5. Parameters vs Variables
 
 ### Parameters
