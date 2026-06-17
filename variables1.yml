@@ -1,0 +1,14 @@
+trigger: none
+
+pool:
+  name: Default
+
+variables:
+- group: terraform-lab
+
+jobs:
+    - script: |
+    echo $(location)
+    echo $(resourceGroupName)
+    echo $(azureSubscription)
+  
