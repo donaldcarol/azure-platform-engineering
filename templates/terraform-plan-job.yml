@@ -3,20 +3,22 @@ parameters:
   type: string
   default: terraform
 
-- name: 'sc-azure-platform-lab'
+- name: azureSubscription
   type: string
 
 jobs:
 - job: TerraformPlan
   displayName: Terraform Plan
+
   steps:
   - task: AzureCLI@2
-    displayName: Terraform Init and Plan
+    displayName: Azure Login + Terraform Init/Plan
     inputs:
       azureSubscription: ${{ parameters.azureSubscription }}
       scriptType: ps
       scriptLocation: inlineScript
       workingDirectory: ${{ parameters.workingDirectory }}
       inlineScript: |
+        az account show
         terraform init
         terraform plan
