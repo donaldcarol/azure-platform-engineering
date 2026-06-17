@@ -1,0 +1,14 @@
+trigger:
+- none
+
+pool:
+  name: Default
+
+steps:
+
+jobs:
+
+- template: templates/terraform-plan-job.yml
+ # parameters:
+    
+  
