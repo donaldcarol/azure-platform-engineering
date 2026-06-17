@@ -5,6 +5,4 @@ pool:
 
 jobs:
 - template: templates/terraform-plan-job.yml
-  parameters:
-    workingDirectory: terraform
-    azureSubscription: 'sc-azure-platform-lab'
+  
