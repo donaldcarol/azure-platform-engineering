@@ -5,6 +5,7 @@ parameters:
 
 - name: azureSubscription
   type: string
+  default: sc-azure-platform-lab
 
 jobs:
 - job: TerraformPlan
