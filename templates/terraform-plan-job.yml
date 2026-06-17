@@ -22,4 +22,8 @@ jobs:
       inlineScript: |
         az account show
         terraform init
-        terraform plan
+        terraform plan -out=tfplan
+
+  - publish: ${{ parameters.workingDirectory }}/tfplan
+    artifact: terraform-plan
+    displayName: Publish Terraform Plan
