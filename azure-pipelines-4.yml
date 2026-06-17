@@ -1,0 +1,25 @@
+# Starter pipeline
+
+
+parameters:
+- name: workingDirectory
+  type: string
+  default: terraform
+
+
+
+jobs:
+- job: TerraformPlan
+  displayName: Terraform Plan
+  steps:
+  - task: AzureCLI@3
+  inputs:
+    connectionType: 'azureRM'
+    azureSubscription: 'sc-azure-platform-lab'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    workingDirectory: ${{ parameters.workingDirectory }}
+
+    inlineScript: |
+      terraform init
+      terraform plan
