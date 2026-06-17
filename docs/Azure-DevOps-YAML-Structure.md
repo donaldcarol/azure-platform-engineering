@@ -252,6 +252,95 @@ stages:
 
   ```
 
+
+### Other examples
+
+```
+Pipeline
+│
+├── Trigger
+├── Pool
+├── Parameters
+├── Variables
+│
+└── Stages
+     │
+     ├── Stage
+     │     │
+     │     └── Jobs
+     │            │
+     │            └── Steps
+     │                   │
+     │                   ├── Script
+     │                   ├── PowerShell
+     │                   ├── Bash
+     │                   └── Task
+     │
+     └── Stage
+           │
+           └── Jobs
+                 │
+                 └── Steps
+
+```
+
+```
+trigger:
+- main
+
+pool:
+  name: Default
+
+variables:
+- group: terraform-lab
+
+stages:
+
+- stage: Validate
+
+  jobs:
+
+  - job: TerraformValidate
+
+    steps:
+
+    - script: terraform fmt -check
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+
+- stage: Plan
+
+  jobs:
+
+  - job: TerraformPlan
+
+    steps:
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+
+- stage: Apply
+
+  jobs:
+
+  - deployment: TerraformApply
+
+    environment: prod
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+
+          - task: AzureCLI@2
+
+
+```
+
   ---
 
 ## 5. Parameters vs Variables
