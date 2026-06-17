@@ -6,9 +6,9 @@ pool:
 
 steps:
 
-  jobs:
+jobs:
 
-    - template: templates/terraform-plan-job.yml
+  - template: templates/terraform-plan-job.yml
  
     
   
