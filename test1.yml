@@ -3,6 +3,10 @@ trigger: none
 pool:
   name: Default
 
+parameters:
+- name: environment
+  type: string
+  default: prod
 
 variables:
   myEnvironment: dev
@@ -12,3 +16,4 @@ steps:
 - script: |
     echo Parameter = ${{ parameters.environment }}
     echo Variable  = $(myEnvironment)
+
