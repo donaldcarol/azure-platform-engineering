@@ -7,4 +7,4 @@ jobs:
 - template: templates/terraform-plan-job.yml
   parameters:
     workingDirectory: terraform
-    azureSubscription: 'Azure subscription 1'
+    azureSubscription: 'sc-azure-platform-lab'
